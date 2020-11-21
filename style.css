@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    margin: 5px 0 0 5px;
+
+    background-color: rgba(76, 25, 214, 0.87);
+}
+
+div#menu {
+    margin: 0px auto;
+}
+
+div#pontuacao {
+    width: 240px;
+    height: 240px;
+
+    border: 1px solid black;
+    background-color: rgba(15, 200, 191, 0.842);
+}
+
+div#pontuacao, p {
+    text-align: center;
+    font-family: Bahnschrift, sans-serif;
+    font-size: 18pt;
+}
+
+p {
+    max-width: 240px;
+}
