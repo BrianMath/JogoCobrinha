@@ -22,11 +22,33 @@ window.onload = function() {
     var trail = []       // Corpo da cobra
     var sizeCobra = 3    // Tamanho inicial da cobra
 
+
+    // Função de nova posição da maçã
+    function newPosApple(posX, posY) {
+        // Gera dois valores aleatórios pras posições X e Y
+        posX = Math.floor(Math.random() * qtdPontos)
+        posY = Math.floor(Math.random() * qtdPontos)
+
+        // Percorre o corpo da cobro
+        for (var c = 0; c < trail.length; c++) {
+            // Se as posições forem as mesmas de uma parte do corpo da cobra ...
+            if (trail[c].x == posX && trail[c].y == posY) {
+                // ... chama a função de novo
+                newPosApple(posX, posY)
+            }
+        }
+
+        // Se as posições forem válidas, retorna elas
+        return [posX, posY]
+    }
+
+
     // Função do jogo
     function game() {
         posCobraX += velX
         posCobraY += velY
 
+        /* Casos em que a cobra sai da tela --> aparece do outro lado */
         if (posCobraX < 0) {
             posCobraX = qtdPontos - 1
         }
@@ -57,7 +79,8 @@ window.onload = function() {
         for (var i = 0; i < trail.length; i++) {
             ctx.fillRect(trail[i].x * sizePontos, trail[i].y * sizePontos, sizePontos - 1, sizePontos - 1)
 
-            // Fim de jogo
+            /* Fim de jogo */
+            // Caso a cobra esteja sobre si própria (se comer)
             if (trail[i].x == posCobraX && trail[i].y == posCobraY) {
                 velX = velY = 0
                 sizeCobra = 3
@@ -84,10 +107,15 @@ window.onload = function() {
             pontos = sizeCobra - 3
             txtPontos.innerHTML = pontos
             
-            posAppleX = Math.floor(Math.random() * qtdPontos)  // random() --> nº entre 0 e 1
-            posAppleY = Math.floor(Math.random() * qtdPontos)
+            // Nova posição da maçã
+            var newPosAppleX = 0
+            var newPosAppleY = 0
+
+            posAppleX = newPosApple(newPosAppleX, newPosAppleY)[0]
+            posAppleY = newPosApple(newPosAppleX, newPosAppleY)[1]
         }
     }
+
 
     // Função de movimento
     function keyPress(event) {
