@@ -34,7 +34,9 @@ window.onload = function() {
             // Se as posições forem as mesmas de uma parte do corpo da cobra ...
             if (trail[c].x == posX && trail[c].y == posY) {
                 // ... chama a função de novo
-                newPosApple(posX, posY)
+                posX = newPosApple(posX, posY)[0]
+                posY = newPosApple(posX, posY)[1]
+                break
             }
         }
 
